@@ -149,3 +149,13 @@ Debian Stable does not provide full supports of fcitx5 table. Here is just a par
 ```
 sudo apt install --install-recommends fcitx5-table
 ```
+
+## Furthermore & Troubleshooting
+### What is `rime`
+```
+"Rime is an input method engine for entering Chinese characters, supporting a wide range of input methods. The Rime engine itself does not provide a frontend for receiving user input. It must be used with an input method framework such as `fcitx5` or `ibus`. " 
+——ArchWiki
+```
+`rime` is a IM engine/addon that can be used on various IM framework. As a result, you can use `rime` on different platforms and operating systems like Windows, Macos and Linux, so that you can get similar input experiece on different OS. 
+One major difference between `rime` and other IM engine is that it does not limit input schemas. Users can, and actually need, to add input schemas to make it work, although mostly `rime-luna-pinyin` is used as default. 
+Thanks to such design, `rime` can not only provide Chinses input method but also have potential to be a general IM engine. Using `rime`, you can type any symbols,emoji or languages in theory if such schemas has been made by any developer. For example, you can make rime-based Greek or Russian input schemas on `ibus-rime` to avoid a known bug of `ibus`.
