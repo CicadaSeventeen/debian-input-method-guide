@@ -3,6 +3,8 @@ Input method (or input method editor, commonly abbreviated as IME or IM) is nece
 
 In Linux world, there are several IMEs available. Users need to install basic IME framework and specific input methods (sometimes call as addons or engines) according to languages they use and also their habit. SpiralLinux does not pre-install IME due to such complicity, but we prefer a guide to help users to choose and install it. 
 
+The specific condition of IM on Debian is kind of different from some other distros, so even those familiar with IM should better read this guide if you never use Debian before.
+
 ## Choice about Input Methods
 
 ### Languages and Input Method Supports
@@ -31,7 +33,7 @@ Note:
 4. Chinese addons is a fcitx5 metapachage providing most Chinese input method excepting zhuyin/chewing
 5. "bad" means it can be support by like rime\m17n\table but there is not any good out-of-box solution 
 
-### IME Framework Suggestion:
+### IM Framework Suggestion:
 1. Use `fcitx5` if it supports you language in Debian Stable or flatpak, unless you are on gnome desktop
 2. Use `ibus` if you are on gnome desktop
 3. Use `ibus` or `fcitx` if your language is not supported well in `fcitx5` without using Testing/Sid packages
@@ -41,8 +43,8 @@ Note:
 ## Ways to Install Input Method
 
 ### `fcitx5` from flatpak
-#### IM Framework
-##### Not using `im-config` (not recommended)
+#### IM Framework (Not using `im-config`)
+`im-config` is Debian's program to choose IM framework to use. It can help you to auto starting IM when booting and help you to set environment variables. Though there are ways to avoid using it, this is not recommended.
 First you need to add flathub repository to flatpak. It should have been added for SpiralLinux out-of-box.
 ```
 sudo apt install fcitx5-frontend*
@@ -50,12 +52,12 @@ sudo flatpak install org.fcitx.Fcitx5
 sudo cp /var/lib/flatpak/exports/share/applications/fcitx5.desktop /etc/xdg/autostart
 ```
 You may need to check auto start settings of desktop environment, depending on which destop environment you use.
-Then adding such lines into `/etc/bash.bashrc` or `/etc/environment`:
+Then adding such lines into `/etc/bash.bashrc` or `/etc/environment`(x86_64 PC for example):
 ```
 export GTK_IM_MODULE=fcitx
 export QT_IM_MODULE=fcitx
 export XMODIFIERS=@im=fcitx
+export PATH=$PATH:/usr/lib/x86_64-linux-gnu/libgtk2.0-0:/usr/lib/x86_64-linux-gnu/libgtk-3-0
 ```
 Then logout from session or just reboot. `fcitx5` should work now.
-##### Using `im-config`
-
+#### IM Framework (Using `im-config`)
