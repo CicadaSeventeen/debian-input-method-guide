@@ -175,4 +175,5 @@ Debian has officical backports repository. However, IM packages are not included
 
 Please do not add repository directly for `apt` if you do not want to update your whole system to Testing or Sid, but you can download their `.deb` packages. Besides, installing IM framework packages is no safe. You may encounter with many problem, especially due to different version of `gtk` and `qt`. On the other hand, using addon packages from Sid is much safer, although there is no promised that everything must be OK.
 
-### 
+### can not activate input method in `ibus`?
+If you have non-English alphabet languages like Greek or Russian in `ibus`, at the same time you use language like Chinese, you will probably find you cannot activate Chinese input method engine from Greek or Russian. You mmay have to switch to English first then you can switch to Chinese IM to activate it. This known bug is intended to do so, becuase otherwise you may be not able to use Chinese IM with alernative keyboard layout. You have to live with it if you choose to use `ibus`, unless you decide to use `rime` to input all languages.
