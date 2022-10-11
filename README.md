@@ -14,7 +14,7 @@ The specific condition of IM on Debian is kind of different from some other dist
 |Traditional Chinese|good|Chinese.addons/chewing|good|good|good|pinyin/chewing|pinyin/wubi/chewing
 |Japanese|mozc only|mozc/ssk|good|good|good|skk/mozc/anthy |skk/anthy|
 |Korean|bad|yes|yes|yes|yes|yes|yes?|
-|Vietnamese|yes|yes|yes|yes|yes|yes|yes
+|Vietnamese|yes|bad|yes|yes|yes|yes|yes
 |Thai|bad|bad|yes|yes|yes|yes?|yes
 |Other languages|bad|bad|yes|good|good|bad|bad
 |rime| yes|yes|yes|yes|yes|no|no
@@ -32,6 +32,7 @@ Note:
 3. table can be used to input many lanugages and symbols but not a good solution too
 4. Chinese addons is a fcitx5 metapachage providing most Chinese input method excepting zhuyin/chewing
 5. "bad" means it can be support by like rime\m17n\table but there is not any good out-of-box solution 
+6. `fcitx` sometimes also called 'fcitx4' to be distinguished from `fcitx5`. They are maintained by one developer.
 
 ### IM Framework Suggestion:
 1. Use `fcitx5` if it supports you language in Debian Stable or flatpak, unless you are on gnome desktop
