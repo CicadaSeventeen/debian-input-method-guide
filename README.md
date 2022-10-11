@@ -22,12 +22,12 @@ The specific condition of IM on Debian is kind of different from some other dist
 |table| no|partial|yes|yes|yes|no|yes
 |----|
 |wayland support|good|good|good|good for gnome, bad otherwise|no|no|no
-|difficulty to install|easy|medium|high|medium|medium|medium|medium
+|difficulty to install|easy|easy|hard|medium|medium|medium|medium
 |age|very new|new|very new|medium|old|out dated|out dated|
 
 
 Note:
-1. rime can be used to input most languages but need some config
+1. rime can be used to input most languages but need some config (see Furthermore)
 2. m17n is a library to support many languages. It do support pinyin and hangul or so on, but it is a bad solution
 3. table can be used to input many lanugages and symbols but not a good solution too
 4. Chinese addons is a fcitx5 metapachage providing most Chinese input method excepting zhuyin/chewing
@@ -44,7 +44,7 @@ Note:
 
 ### `fcitx5` from flatpak
 #### IM Framework (Not using `im-config`)
-`im-config` is Debian's program to choose IM framework to use. It can help you to auto starting IM when booting and help you to set environment variables. Though there are ways to avoid using it, this is not recommended.
+`im-config` is Debian's program to choose IM framework to use. It can help you to auto starting IM when booting and help you to set environment variables. However, if you choose to install `fcitx5` from flatpak, `im-config` cannot work for it, so we have to make a hack.
 First you need to add flathub repository to flatpak. It should have been added for SpiralLinux out-of-box.
 ```
 sudo apt install fcitx5-frontend*
@@ -60,4 +60,91 @@ export XMODIFIERS=@im=fcitx
 export PATH=$PATH:/usr/lib/x86_64-linux-gnu/libgtk2.0-0:/usr/lib/x86_64-linux-gnu/libgtk-3-0
 ```
 Then logout from session or just reboot. `fcitx5` should work now.
-#### IM Framework (Using `im-config`)
+#### ~~IM Framework (using `im-config`)~~ Need a patch or some config
+#### IM Addons
+##### For Simplified Chinese
+```
+sudo flatpak install org.fcitx.Fcitx5.Addon.ChineseAddons
+```
+##### For Traditional Chinese
+```
+sudo flatpak install org.fcitx.Fcitx5.Addon.ChineseAddons
+```
+Then if you want chewing/zhuyin
+```
+sudo flatpak install org.fcitx.Fcitx5.Addon.Zhuyin
+```
+or
+```
+sudo flatpak install org.fcitx.Fcitx5.Addon.Chewing
+```
+`zhuyin` uses `libpinyin` project. You can choose one as you like.
+##### For Japanese
+Only Mozc available. `fcitx5` in flatpak is not a good choice for Japanese users now.
+```
+sudo flatpak install org.fcitx.Fcitx5.Addon.Mozc
+```
+##### For Vietnamese
+```
+sudo flatpak install org.fcitx.Fcitx5.Addon.Unikey
+```
+##### If you want M17N 
+```
+sudo flatpak install org.fcitx.Fcitx5.Addon.M17N
+```
+##### If you want rime 
+```
+sudo flatpak install org.fcitx.Fcitx5.Addon.Rime
+```
+### `fcitx5` from Debian Stable
+#### IM Framework
+```
+sudo apt install --install-recommends fcitx5 im-config
+```
+Here `--install-recommends` is necessary, or `fcitx5` on Debian will not work. The major point this Debian makes `fcitx5-module-xorg` as a individual package, which is differrnt from many distros. Do not forget it.
+Then use non-root user to run
+```
+im-config
+```
+You can choose `fcitx5` here. Then logout from session or just reboot. `fcitx5` should work now.
+##### For kde users
+You can install `kde-config-fcitx5` but it is not necessary.
+You can use kimpanel. It will make IM look much better, but conflict with theme package `fcitx5-material-color`.
+##### For gnome users
+Please install `gnome-shell-extension-kimpanel` too. This is necessary if you want yo to use `fcitx5` on gnome.
+##### For other desktops
+If you want some themes, you can install `fcitx5-material-color`.
+#### IM Addons
+Some addons are absent here. That is because `fcitx5` is a quite young program so that many of its addons have not been included into Debian stable. You can using packages from Testing or Sid. See Furthermore.
+##### For Simplified Chinese
+```
+sudo apt install --install-recommends fcitx5-chinese-addons
+```
+Here `--install-recommends` may not be necessary but highly recommended.
+##### For Traditional Chinese
+```
+sudo apt install --install-recommends fcitx5-chinese-addons
+```
+Then if you want chewing
+```
+sudo apt install --install-recommends fcitx5-chewing
+```
+`zhuyin` using `libpinyin` is absent here.
+##### For Japanese
+You can only install one of there two. However, `kkc` and  `anthy` are absent here.
+```
+sudo apt install --install-recommends fcitx5-mozc fcitx5-ssk
+```
+##### For Korean
+```
+sudo apt install --install-recommends fcitx5-hangul
+```
+##### If you want rime 
+```
+sudo apt install --install-recommends fcitx5-rime
+```
+##### If you want table
+Debian Stable does not provide full supports of fcitx5 table. Here is just a partial one.
+```
+sudo apt install --install-recommends fcitx5-table
+```
