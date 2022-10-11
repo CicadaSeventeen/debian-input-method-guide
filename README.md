@@ -36,3 +36,26 @@ Note:
 2. Use `ibus` if you are on gnome desktop
 3. Use `ibus` or `fcitx` if your language is not supported well in `fcitx5` without using Testing/Sid packages
 4. Do not use `uim` or `scim` because they are out of date. Few people still using them so there could be many unclear problems
+5. Using addon packages from Debian Tesing/Sid can be quite safe, but please not install basic `fcitx5` framework from there
+
+## Ways to Install Input Method
+
+### `fcitx5` from flatpak
+#### IM Framework
+##### Not using `im-config` (not recommended)
+First you need to add flathub repository to flatpak. It should have been added for SpiralLinux out-of-box.
+```
+sudo apt install fcitx5-frontend*
+sudo flatpak install org.fcitx.Fcitx5 
+sudo cp /var/lib/flatpak/exports/share/applications/fcitx5.desktop /etc/xdg/autostart
+```
+You may need to check auto start settings of desktop environment, depending on which destop environment you use.
+Then adding such lines into `/etc/bash.bashrc` or `/etc/environment`:
+```
+export GTK_IM_MODULE=fcitx
+export QT_IM_MODULE=fcitx
+export XMODIFIERS=@im=fcitx
+```
+Then logout from session or just reboot. `fcitx5` should work now.
+##### Using `im-config`
+
