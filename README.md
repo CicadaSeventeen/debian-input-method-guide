@@ -19,7 +19,7 @@ The specific condition of IM on Debian is kind of different from some other dist
 |Other languages|bad|bad|yes|good|good|bad|bad
 |rime| yes|yes|yes|yes|yes|no|no
 |m17n| yes|no|yes|yes|yes|yes|yes
-|table| no|partial|yes|yes|yes|no|yes
+|more table| no|no|yes|yes|yes|no|yes
 |----|
 |wayland support|good|good|good|good for gnome, bad otherwise|no|no|no
 |difficulty to install|easy|easy|hard|medium|medium|medium|medium
@@ -62,7 +62,7 @@ export PATH=$PATH:/usr/lib/x86_64-linux-gnu/libgtk2.0-0:/usr/lib/x86_64-linux-gn
 ```
 Then logout from session or just reboot. `fcitx5` should work now.
 #### ~~IM Framework (using `im-config`)~~ Need a patch or some config
-#### IM Addons
+#### IM Engines
 ##### For Simplified Chinese
 ```
 sudo flatpak install org.fcitx.Fcitx5.Addon.ChineseAddons
@@ -115,7 +115,7 @@ You can use kimpanel. It will make IM look much better, but conflict with theme 
 Please install `gnome-shell-extension-kimpanel` too. This is necessary if you want yo to use `fcitx5` on gnome.
 ##### For other desktops
 If you want some themes, you can install `fcitx5-material-color`.
-#### IM Addons
+#### IM Engines
 Some addons are absent here. That is because `fcitx5` is a quite young program so that many of its addons have not been included into Debian stable. You can using packages from Testing or Sid. See Furthermore.
 ##### For Simplified Chinese
 ```
@@ -168,4 +168,11 @@ However, to realize this potential, you need to spend much time config `rime`, e
 
 `m17n` is a Gnu project to support many languages. However, many IM schemas in `m17n` is not good for using. Many packages named as `xx-m17n` even do not provide all the supported languages of `m17n`, so that it should not be seen as solution when you have other choices.
 
-`table` may 
+`table` actually means "code table". For primary understanding, it can be seen as library of IM. However, for some IM framework, table packages also include some IM engine. For example, `fcitx-table-extra` provides `cangjie` which can help to input some strange characters. However, mostly these packages are just for "strange and rare symbols" which are not common used at all, so you should not look upon them as IM solution.
+
+### `fcitx5` packages from Sid
+Debian has officical backports repository. However, IM packages are not included. As a result, if you want to use newer `fcitx5` packages, you need to install them from Debian Testing or Sid repository.
+
+Please do not add repository directly for `apt` if you do not want to update your whole system to Testing or Sid, but you can download their `.deb` packages. Besides, installing IM framework packages is no safe. You may encounter with many problem, especially due to different version of `gtk` and `qt`. On the other hand, using addon packages from Sid is much safer, although there is no promised that everything must be OK.
+
+### 
