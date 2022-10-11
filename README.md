@@ -11,7 +11,7 @@ The specific condition of IM on Debian is kind of different from some other dist
 ||fcitx5 from flatpak|fcitx5|fcitx5 from Sid|ibus|fcitx(4)|uim|scim|
 |--|--|--|--|--|--|--|--|
 |Simplifed Chinese|good|good|good|good|good|pinyin/wubi?|pinyin/wubi
-|Traditional Chinese|good|Chinese.addons/chewing|good|good|good|pinyin/chewing|pinyin/wubi/chewing
+|Traditional Chinese|good|chinese-addons/chewing|good|good|good|pinyin/chewing|pinyin/wubi/chewing
 |Japanese|mozc only|mozc/ssk|good|good|good|skk/mozc/anthy |skk/anthy|
 |Korean|bad|yes|yes|yes|yes|yes|yes?|
 |Vietnamese|yes|bad|yes|yes|yes|yes|yes
@@ -27,10 +27,10 @@ The specific condition of IM on Debian is kind of different from some other dist
 
 
 Note:
-1. rime can be used to input most languages but need some config (see Furthermore)
-2. m17n is a library to support many languages. It do support pinyin and hangul or so on, but it is a bad solution
-3. table can be used to input many lanugages and symbols but not a good solution too
-4. Chinese addons is a fcitx5 metapachage providing most Chinese input method excepting zhuyin/chewing
+1. `rime` can be used to input most languages but need some config (see Furthermore)
+2. `m17n` is a library to support many languages, but usually it is a bad solution
+3. `table` can be used to input many lanugages and symbols but not a good solution too
+4. `chinese-addons` is a fcitx5 metapachage providing most Chinese input method excepting zhuyin/chewing
 5. "bad" means it can be support by like rime\m17n\table but there is not any good out-of-box solution 
 6. `fcitx` sometimes also called 'fcitx4' to be distinguished from `fcitx5`. They are maintained by one developer.
 
@@ -157,9 +157,15 @@ sudo apt install --install-recommends fcitx5-table
 ——ArchWiki
 ```
 `rime` is a IM engine/addon that can be used on various IM framework. As a result, you can use `rime` on different platforms and operating systems like Windows, Macos and Linux, so that you can get similar input experience on different OS. 
+
 One major difference between `rime` and other IM engine is that it does not limit input schemas. Users can, and actually need, to add input schemas to make it work, although mostly `rime-luna-pinyin` is used as default. 
+
 Thanks to such design, `rime` can not only provide Chinses input method but also have potential to be a general IM engine. Using `rime`, you can type any symbols,emoji or other languages if such schemas has been made by any developer. For example, you can make rime-based Greek input schemas on `ibus-rime` to avoid a known bug of `ibus`if you use Chinese and Greek on `ibus` at the same time.
+
 However, to realize this potential, you need to spend much time config `rime`, especially when you have to make you own schemas. So even though `rime` provides IM for every langauge in theory, it may not be as powerful in practice.
 
-### What is `M17N`
-### What is `table`
+### `m17n` and `table`
+
+`m17n` is a Gnu project to support many languages. However, many IM schemas in `m17n` is not good for using. Many packages named as `xx-m17n` even do not provide all the supported languages of `m17n`, so that it should not be seen as solution when you have other choices.
+
+`table` may 
