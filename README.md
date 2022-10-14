@@ -1,9 +1,7 @@
-## Localization
-If you use non-English languages, you need to localize your system. Normally, localization needs two things: `locale` support and fonts. 
+# Localization
+If you use non-English languages, you need to localize your system. Normally, localization needs two things: `locale` support and fonts, but sometimes input method is also needed. If you are newcomer and do not want to set all of these three ( or two ) byy step, you can just read `For Newcomers` chapter.
 
-For locale suppports, SpiralLinux provides a program to install set, which you can easily find it out-of-box.
-
-If there are any problems, you can also install `locales-all` which provides all locale supoorts, and then edit environment variable to change languages. For example, you can edit `/etc/bash.bashrc` adding such line:
+For locale suppports, SpiralLinux provides a program to install set, which you can easily find it out-of-box. If there are any problems, you can also install `locales-all` which provides all locale supoorts, and then edit environment variable to change languages. For example, you can edit `/etc/bash.bashrc` adding such line:
 ```
 export LANG=zh_CN.utf8
 ```
@@ -11,9 +9,22 @@ This will provide Simplified Chinese as default language for you after reboot . 
 
 Besides, you need to install fonts so that system can show your language letters or characters, or it will show some strange squares usually called tofu. For most languages, SpiralLinux provides font support out of box. If not, you can install all `fonts-noto*` packages. 
 
-However, if you used Asian Languages, or you are multi-langauge user, you may want a input method, and here is the guide for you.
-# Input Method Installation Guide
-Input method (or input method editor, commonly abbreviated as IME or IM) is necessary for some Asian langauge like Chinese or Japanese. It can also used to input some symbols or ancient letters not used today anymore. For most multi languages users, even though swiching keyboard layout is enough, using IME to manage it can be a good choice.
+If you used some Asian Languages, or you are multi-langauge user, you may want a input method. Input method (or input method editor, commonly abbreviated as IME or IM) is necessary for some Asian langauge like Chinese or Japanese. It can also used to input some symbols or ancient letters not used today anymore. For most multi languages users, even though swiching keyboard layout is enough, using IME to manage it can be a good choice.
+
+However,installing IM can be kind of complex. For users want to choose and install IM themselves, please read the guidance below. Otherwise, following `For Newcomer` chapter may be a good choide for you.
+
+## For Newcomers
+If you want to set localiztion ( especially to instal IM ) as easily as possible, do not care about what IM you use, and especially you do not use multi languages, you can simply install task packages for localization. Task packages are like package groups of Fedora or patterns of openSUSE. You can install `tasksel` to set and install task packages, but use `apt` to directly install it is also good.
+
+To search task packages, try `apt search task-`, most task packages here is for fully localization. For example,if you want Japanese, you can use:
+```
+apt install --install-recommends task-japanese task-japanese-desktop im-config
+```
+If you use gnome, you can also install `task-japanese-gnome-desktop`; If you use kde, you can also install `task-japanese-kde-dekstop`.
+
+For other languages users, just change 'japanese' for your own language.  `im-config` is not necessary for those do not use asian languages. Otherwise, you can use `im-config` to choose IM for you.
+
+# Input Method Guidance
 
 In Linux world, there are several IMEs available. Users need to install basic IME framework and specific input methods (sometimes call as addons or engines) according to languages they use and also their habit. SpiralLinux does not pre-install IME due to such complicity, but we prefer a guide to help users to choose and install it. 
 
@@ -41,7 +52,7 @@ The specific condition of IM on Debian is kind of different from some other dist
 
 
 Note:
-1. `rime` can be used to input most languages but need some config (see Furthermore)
+1. `rime` can be used to input most languages but need some config (see `Furthermore & Toubleshooting` )
 2. `m17n` is a library to support many languages, but usually it is a bad solution
 3. `table` can be used to input many lanugages and symbols but not a good solution too
 4. `chinese-addons` is a fcitx5 metapachage providing most Chinese input method excepting zhuyin/chewing
@@ -130,7 +141,7 @@ Please install `gnome-shell-extension-kimpanel` too. This is necessary if you wa
 ##### For other desktops
 If you want some themes, you can install `fcitx5-material-color`.
 #### IM Engines
-Some addons are absent here. That is because `fcitx5` is a quite young program so that many of its addons have not been included into Debian stable. You can using packages from Testing or Sid. See Furthermore.
+Some addons are absent here. That is because `fcitx5` is a quite young program so that many of its addons have not been included into Debian stable. You can using packages from Testing or Sid. See `Furthermore & Toubleshooting`.
 ##### For Simplified Chinese
 ```
 sudo apt install --install-recommends fcitx5-chinese-addons
@@ -158,11 +169,63 @@ sudo apt install --install-recommends fcitx5-hangul
 ```
 sudo apt install --install-recommends fcitx5-rime
 ```
-##### If you want table
-Debian Stable does not provide full supports of fcitx5 table. Here is just a partial one.
+
+### `ibus`
+`ibus` is probably the most widely used IME in Linux world due to it is highly integrated into gnome desktop. Using `ibus` on gnome desktop can easily gain a good experience. However, on other desktops it is widely thought that `fcixt5` is better.  One strong reason to use `ibus` in SpiralLinux is that in Debian 11 it supports much more languages officially. However, `ibus` does not support wayland well on non-gnome desktop. 
+
+#### IM framwwork
 ```
-sudo apt install --install-recommends fcitx5-table
+sudo apt install --install-recommends ibus im-config
 ```
+Then use `im-config` to set IM framwork and logout or reboot to make it work.
+
+#### IM Engines
+`ibus` provides most language support in Debian Stable.
+##### For Chinese
+If you need pinyin IM:
+```
+sudo apt install --install-recommends ibus-linpyin
+```
+If you need zhuyin IM, you can choose `ibus-libzhuyin` or `ibus-chewing`. Please do not use`ibus-pinyin` and `ibus-zhuyin` because they are aged and not maintained anymore.
+
+##### For Japanese
+`ibus-kkc` `ibus-ssk` `ibus-anthy` and `ibus-mozc` are all available here. Just choose what you want.
+
+##### For Korean
+```
+sudo apt install --install-recommends ibus-hangul
+```
+##### For Vietnamese
+```
+sudo apt install --install-recommends ibus-unikey
+```
+##### For Thai
+```
+sudo apt install --install-recommends ibus-libthai
+```
+##### If you want rime 
+```
+sudo apt install --install-recommends ibus-rime
+```
+##### If you want m17n
+```
+sudo apt install --install-recommends ibus-m17n
+```
+##### If you want more table or other language support
+Please search for `ibus-table*` packages for extra tables, and `ibus-*` packages for more IM. If here is no language support of what you want, please think about using `fcitx`.
+
+### `fcitx`
+`fcitx`, sometimes also called fcitx4 to be distinguished from `fcitx5`, is older version that still be maintained now. It does not support wayland. The only reason to use it rather than `fcitx5` maybe is it support more addons, especially on Debian 11. It can be the best choice if you need to use languages like Sinhala. 
+
+#### IM framework
+```
+sudo apt install --install-recommends fcitx im-config
+```
+Then use `im-config` to set IM framwork and logout or reboot to make it work.
+
+If you need themes, you can install `fcitx-ui*` packages.
+#### IM Engines
+The package name of `fcitx` is similar to it of `fcitx5`. You can search them for yourself. If your lanaguages are not supported, please think about searching your languages under `ibus`.
 
 ## Furthermore & Troubleshooting
 ### What is `rime`
