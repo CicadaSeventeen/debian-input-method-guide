@@ -1,3 +1,17 @@
+## Localization
+If you use non-English languages, you need to localize your system. Normally, localization needs two things: `locale` support and fonts. 
+
+For locale suppports, SpiralLinux provides a program to install set, which you can easily find it out-of-box.
+
+If there are any problems, you can also install `locales-all` which provides all locale supoorts, and then edit environment variable to change languages. For example, you can edit `/etc/bash.bashrc` adding such line:
+```
+export LANG=zh_CN.utf8
+```
+This will provide Simplified Chinese as default language for you after reboot . You can see the 'code' of your language from `locale -a` after installing `locales-all`.
+
+Besides, you need to install fonts so that system can show your language letters or characters, or it will show some strange squares usually called tofu. For most languages, SpiralLinux provides font support out of box. If not, you can install all `fonts-noto*` packages. 
+
+However, if you used Asian Languages, or you are multi-langauge user, you may want a input method, and here is the guide for you.
 # Input Method Installation Guide
 Input method (or input method editor, commonly abbreviated as IME or IM) is necessary for some Asian langauge like Chinese or Japanese. It can also used to input some symbols or ancient letters not used today anymore. For most multi languages users, even though swiching keyboard layout is enough, using IME to manage it can be a good choice.
 
